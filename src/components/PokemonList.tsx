@@ -2,21 +2,23 @@ import PokemonCard from "./PokemonCard";
 import "../styles/PokemonList.css";
 
 interface Props {
-  pokemons: string[];
+  pokemons: { name: string; url: string }[];
 }
 
 const PokemonList = (props: Props) => {
   return (
     <div className="pokemon-list">
-      {props.pokemons.map(() => {
-        return <PokemonCard />;
+      {props.pokemons.map((pokemon) => {
+        return (
+          <PokemonCard
+            key={pokemon.name}
+            name={pokemon.name}
+            url={pokemon.url}
+          />
+        );
       })}
     </div>
   );
-};
-
-PokemonList.defaultProps = {
-  pokemons: Array(10).fill(""),
 };
 
 export default PokemonList;
