@@ -1,13 +1,9 @@
 import { StarOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import Meta from "antd/lib/card/Meta";
+import { PokemonType } from "../actions/types";
 
-interface MyProps {
-  name: string;
-  url: string;
-}
-
-const PokemonCard = (props: MyProps) => {
+const PokemonCard = (props: PokemonType) => {
   return (
     <Card
       title={props.name}
