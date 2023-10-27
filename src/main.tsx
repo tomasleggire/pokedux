@@ -8,12 +8,12 @@ import {
   compose,
   legacy_createStore as createStore,
 } from "redux";
-import { featuring, logger } from "./middlewares/index.ts";
+import { featuring, logger, pokeUpperCaseName } from "./middlewares/index.ts";
 import "antd/dist/reset.css";
 import "./index.css";
 
 const composedEnhancers = compose(
-  applyMiddleware(logger, featuring),
+  applyMiddleware(logger, featuring, pokeUpperCaseName),
   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
     (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );

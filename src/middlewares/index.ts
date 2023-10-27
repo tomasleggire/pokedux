@@ -11,3 +11,9 @@ export const featuring = (store: any) => (next: any) => (actionInfo: any) => {
     };
     next(updatedActionInfo);
   };
+
+export const pokeUpperCaseName = (store: any) => (next: any) => (actionInfo: any) => {
+    const upperCase = [...actionInfo.payload.map(poke => ({...poke, name: poke.name.toUpperCase()}))]
+    const updatedActionInfo = {...actionInfo, payload: [...upperCase]}
+    next(updatedActionInfo);
+}
