@@ -1,8 +1,9 @@
 import PokemonCard from "./PokemonCard";
 import "../styles/PokemonList.css";
+import { IPokemonDetails } from "../actions/types";
 
 interface Props {
-  pokemons: { name: string; url: string }[];
+  pokemons: IPokemonDetails[];
 }
 
 const PokemonList = (props: Props) => {
@@ -13,7 +14,7 @@ const PokemonList = (props: Props) => {
           <PokemonCard
             key={pokemon.name}
             name={pokemon.name}
-            url={pokemon.url}
+            image={pokemon.sprites.front_default}
           />
         );
       })}

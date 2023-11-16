@@ -3,10 +3,11 @@ import { setPokemons } from "./actions";
 import { Col } from "antd";
 import Searcher from "./components/Searcher";
 import PokemonList from "./components/PokemonList";
-import getPokemon from "./api";
+import { getPokemon, getPokemonDetails } from "./api";
 import logo from "./statics/logo.svg";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
+import { PokemonType } from "./actions/types";
 
 function App() {
   const pokemons = useSelector((state: any) => state.pokemons);
@@ -15,7 +16,10 @@ function App() {
   useEffect(() => {
     const fetchPokemons = async () => {
       const pokemonsRes = await getPokemon();
-      dispatch(setPokemons(pokemonsRes));
+      const pokemonDetailed = await Promise.all(
+        pokemonsRes.map((pokemon: PokemonType) => getPokemonDetails(pokemon))
+      );
+      dispatch(setPokemons(pokemonDetailed));
     };
     fetchPokemons();
   }, []);
