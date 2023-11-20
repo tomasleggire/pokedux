@@ -8,14 +8,16 @@ import {
   compose,
   legacy_createStore as createStore,
 } from "redux";
+import thunk from "redux-thunk";
 import { logger, pokeUpperCaseName } from "./middlewares/index.ts";
 import "antd/dist/reset.css";
 import "./index.css";
 
-const composedEnhancers = compose(
-  applyMiddleware(logger, pokeUpperCaseName),
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+const composeAlt =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const composedEnhancers = composeAlt(
+  applyMiddleware(thunk, logger, pokeUpperCaseName)
 );
 
 const store = createStore(pokemonsReducer, composedEnhancers);
